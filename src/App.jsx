@@ -1,12 +1,16 @@
 import TaskForm from "./components/TaskForm"
 import { TaskList } from "./components/TaskList";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { saveTaskList } from "./logic/storage/index.js";
 
 
 
 function App() {
 
-  const [tasksList, setTaskList] = useState([]);
+  const [tasksList, setTaskList] = useState(() => {
+    const taskListFromStorage = window.localStorage.getItem('taskList');
+    return taskListFromStorage ? JSON.parse(taskListFromStorage) : [];
+  });
   const addTask = (text) => {
     if (!text.trim()) return;
 
@@ -27,6 +31,11 @@ function App() {
     });
     setTaskList(newTaskList);
   }
+
+  useEffect(() => {
+    if (tasksList.length === 0) return;
+    saveTaskList(tasksList);
+  }, [tasksList]);
 
 
   return (
