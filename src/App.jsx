@@ -23,7 +23,7 @@ function App() {
   }
 
   const updateTask = (id) => {
-    const newTaskList = tasksList.map((task) => {
+    const newTaskList = newTaskList.map((task) => {
       if (task.id === id && !task.complete) {
         task.complete = true;
       }
