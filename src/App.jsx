@@ -23,17 +23,16 @@ function App() {
   }
 
   const updateTask = (id) => {
-    const newTaskList = [...tasksList];
-    newTaskList.map((task) =>{
-      if (task.id === id && !task.complete) {
-        task.complete = true;
-      }
-    });
-    setTaskList(newTaskList);
+    setTaskList(prev => prev.map(task => 
+      task.id === id ? { ...task, complete: !task.complete } : task
+    ));
+  }
+
+  const deleteTask = (id) => {
+    setTaskList(prev => prev.filter((task) => task.id !== id));
   }
 
   useEffect(() => {
-    if (tasksList.length === 0) return;
     saveTaskList(tasksList);
   }, [tasksList]);
 
@@ -44,7 +43,7 @@ function App() {
         <main className="flex flex-col items-center justify-center h-screen">
           <div className="card-task w-lg bg-white rounded-xl p-5">
             <TaskForm addTask={addTask} />
-            <TaskList list={tasksList} updateTask={updateTask} />
+            <TaskList list={tasksList} updateTask={updateTask} deleteTask={deleteTask} />
           </div>
         </main>
       </div>

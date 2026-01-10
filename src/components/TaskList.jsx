@@ -1,30 +1,31 @@
 
-export function TaskList( { list, updateTask }) {
-    const handleChange = (e) => {
-        updateTask(Number(e.target.id));
-    }
+export function TaskList( { list, updateTask, deleteTask}) {
+
     return(
-        <>
             <section>
-                <div className="">
+                <div>
                     <div className="mt-5 flex flex-col items-start gap-3">
                         {
-                            list.map((task, index) => {
+                            list.map((task) => {
                                 return (
                                     <div
-                                    className="w-full flex gap-5 items-center justify-start pb-2 border-b border-rose-200"
-                                    key={index}
+                                    className="w-full flex justify-between items-center pb-2 border-b border-rose-200"
+                                    key={task.id}
                                     >
                                         <input 
                                         className="accent-rose-400 border-0 outline-0" 
                                         type="checkbox"
-                                        id={task.id}
-                                        value={task.complete} 
                                         disabled={task.complete}
-                                        checked={task.complete ? "checked" : ""}
-                                        onChange={handleChange}
+                                        checked={task.complete}
+                                        onChange={() => updateTask(task.id)}
                                         />
                                         <span className={ !task.complete ? "font-bold text-lg text-rose-400" : "font-bold text-lg text-gray-300 line-through" }>{task.text}</span>
+                                        <button
+                                            className="justify-self-end-safe border bg-rose-600 text-white p-2 font-semibold cursor-pointer"
+                                            onClick={() => deleteTask(task.id)}
+                                        >
+                                            Delete
+                                        </button>
                                     </div>
                                 )
                             })
@@ -32,6 +33,5 @@ export function TaskList( { list, updateTask }) {
                     </div>
                 </div>
             </section>
-        </> 
     )
 }
