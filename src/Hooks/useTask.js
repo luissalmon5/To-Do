@@ -36,7 +36,6 @@ export function useTask() {
 
     return {
         tasksList,
-        setTaskList,
         addTask,
         updateTask,
         deleteTask
