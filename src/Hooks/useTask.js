@@ -5,8 +5,11 @@ export function useTask() {
 
     const [tasksList, setTaskList] = useState(() => {
         const taskListFromStorage = window.localStorage.getItem('taskList');
-        return taskListFromStorage ? JSON.parse(taskListFromStorage) : [];
+        if (taskListFromStorage && taskListFromStorage !== "undefined") return JSON.parse(taskListFromStorage);
+        return [];
     });
+
+    const [filterText, setFilterText] = useState('');
 
     const addTask = (text) => {
         if (!text.trim()) return;
@@ -29,16 +32,21 @@ export function useTask() {
         setTaskList(prev => prev.filter((task) => task.id !== id));
     }
 
+
+    const filteredTasks = tasksList.filter(task =>
+        task.text.toLowerCase().includes(filterText.toLowerCase())
+    );
     
     useEffect(() => {
         saveTaskList(tasksList);
     }, [tasksList])
 
     return {
-        tasksList,
+        tasksList: filteredTasks,
         addTask,
         updateTask,
-        deleteTask
+        deleteTask,
+        setFilterText
     }
 
 }

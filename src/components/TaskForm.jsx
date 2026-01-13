@@ -7,13 +7,12 @@ export function TaskForm( { addTask } ) {
         addTask(taskInput);
         setTaskInput('');
     }
-    
 
     return (
         <>
             <section>
-                <div className="title flex gap-3 items-center justify-center mb-4">
-                    <h2 className='text-center font-extrabold text-2xl'>Task's</h2>
+                <div className="title flex gap-3 items-center justify-center">
+                    <h2 className='text-center font-extrabold text-2xl mb-4'>Task's</h2>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff637e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-list"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2" /><path d="M9 12l.01 0" /><path d="M13 12l2 0" /><path d="M9 16l.01 0" /><path d="M13 16l2 0" /></svg>
                 </div>
 
